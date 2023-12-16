@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import schedule
 import time
@@ -31,8 +32,8 @@ def synchronize_folders(source_folder, replica_folder):
     curr_datetime = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
 
     print (curr_datetime)
-    log_file = (r"c:\temp\sync_log" + curr_datetime + ".txt")
-    logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s - %(message)s')
+    log_file = (r"c:\temp\sync_" + curr_datetime + ".log")
+    logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(message)s')
 
 
     # Copy new or modified files
@@ -57,9 +58,17 @@ def synchronize_folders(source_folder, replica_folder):
 
 
 # Schedule synchronization every 1 hour
-path_from = input("From : ")
-path_to = input("To : ")
-interval = input ("Interval (hours) : ")
+for value in sys.argv:
+    print (sys.argv[0])
+    print (sys.argv[1])
+    print (sys.argv[2])
+    print (sys.argv[3])
+    path_from = sys.argv[1] 
+    path_to = sys.argv[2]
+    interval = sys.argv[3]
+#path_from = input("From : ")
+#path_to = input("To : ")
+#interval = input ("Interval (hours) : ")
 interval = float(interval)
 schedule.every(interval).hours.do(synchronize_folders, path_from, path_to)
 
