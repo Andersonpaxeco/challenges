@@ -29,35 +29,44 @@ def synchronize_folders(source_folder, replica_folder):
 
     # Files to be removed from replica folder
     to_remove = replica_files - source_files
-    curr_datetime = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+    
 
     print (curr_datetime)
     log_file = (r"c:\temp\sync_" + curr_datetime + ".log")
     logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(message)s')
 
-
-    # Copy new or modified files
-    for file_name in to_copy:
+    #create log file activity
+    #outtext = open(r"c:\temp\replicate.log_" + curr_datetime + ".log","w+")
+    with open(r"c:\temp\replicate.log_" + curr_datetime + ".log","a+") as outtext:
+        # Copy new or modified files
+        outtext.write("Starting Synchronization : " + curr_datetime + "\r\n")
+        outtext.write("-----------------------------------------------\r\n")
+        outtext.write(" Files copied to Replica folder                \r\n")
+        outtext.write("-----------------------------------------------\r\n")
+        for file_name in to_copy:
+            source_path = os.path.join(source_folder, file_name)
+            replica_path = os.path.join(replica_folder, file_name)
+            shutil.copy2(source_path, replica_path)
+            print(f"Copied: {file_name}")
+            outtext.write("File : "+ file_name + "\r\n")
         
-        source_path = os.path.join(source_folder, file_name)
-        replica_path = os.path.join(replica_folder, file_name)
-        print (source_path)
-        print (replica_path)
-        shutil.copy2(source_path, replica_path)
-       
-        #shutil.copy2(source_folder+file_name,replica_folder+file_name)
-        print(f"Copied: {file_name}")
 
-    # Remove files not present in the source folder
-    for file_name in to_remove:
-        file_path = os.path.join(replica_folder, file_name)
-        os.remove(file_path)
-        print(f"Removed: {file_name}")
-
-    print("Synchronization complete.")
-
-
+        # Remove files not present in the source folder
+        outtext.write("-----------------------------------------------\r\n")
+        outtext.write(" Files removed to Replica folder               \r\n")
+        outtext.write("-----------------------------------------------\r\n")
+        for file_name in to_remove:
+            file_path = os.path.join(replica_folder, file_name)
+            os.remove(file_path)
+            print(f"Removed: {file_name}")
+            outtext.write("File : "+ file_name + "\r\n")
+        
+        print("Synchronization complete.")
+        outtext.write("Synchronization complete : " + curr_datetime + "\r\n")
+        outtext.close()
+    
 # Schedule synchronization every 1 hour
+curr_datetime = datetime.now().strftime('%Y-%m-%d %H-%M-%S')    
 for value in sys.argv:
     print (sys.argv[0])
     print (sys.argv[1])
@@ -69,8 +78,10 @@ for value in sys.argv:
 #path_from = input("From : ")
 #path_to = input("To : ")
 #interval = input ("Interval (hours) : ")
+
 interval = float(interval)
 schedule.every(interval).hours.do(synchronize_folders, path_from, path_to)
+
 
 # Run the scheduler
 while True:
