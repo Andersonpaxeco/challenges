@@ -1,8 +1,13 @@
+# Replicate files to another folder with time interval and generate a log file
+# Usage : python + replic.py + folder from + folder to + interval(hours : ex 0.5, 1 ,12)
+# Ex : python replic.py c:\teste\origem c:\teste\destino 0.001
+
 import os
 import sys
 import shutil
 import schedule
 import time
+import hashlib
 import logging
 from datetime import datetime
 
@@ -36,7 +41,6 @@ def synchronize_folders(source_folder, replica_folder):
     logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(message)s')
 
     #create log file activity
-    #outtext = open(r"c:\temp\replicate.log_" + curr_datetime + ".log","w+")
     with open(r"c:\temp\replicate.log_" + curr_datetime + ".log","a+") as outtext:
         # Copy new or modified files
         outtext.write("Starting Synchronization : " + curr_datetime + "\r\n")
@@ -47,8 +51,18 @@ def synchronize_folders(source_folder, replica_folder):
             source_path = os.path.join(source_folder, file_name)
             replica_path = os.path.join(replica_folder, file_name)
             shutil.copy2(source_path, replica_path)
+            # extract MD5 hash start
+            file_obj_source_path = open(source_path, 'rb')
+            file_obj_replica_path = open(source_path, 'rb')
+            source_path = file_obj_source_path.read()
+            replica_path = file_obj_replica_path.read()
+            md5_hash_source = hashlib.md5(source_path).hexdigest()
+            md5_hash_replica = hashlib.md5(replica_path).hexdigest()
+            file_obj_source_path.close()
+            file_obj_replica_path.close()
+            # extract MD5 hash end
             print(f"Copied: {file_name}")
-            outtext.write("File : "+ file_name + "\r\n")
+            outtext.write("File : "+ file_name + " - MD5 source : " + md5_hash_source + " - MD replica : " + md5_hash_replica + "\r\n")
         
 
         # Remove files not present in the source folder
