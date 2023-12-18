@@ -7,14 +7,25 @@
 # primary key(nameid));
 
 from PyQt5 import uic,QtWidgets
+import mysql.connector
+
+db = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "xx",
+    database = "store"
+)
 
 def main_function():
     line1 = main_form.lineEdit.text()
     line2 = main_form.lineEdit_2.text()
     line3 = main_form.lineEdit_3.text()
-    print (line1)
-    print (line2)
-    print (line3)
+    
+    cursor = db.cursor()
+    command = "insert into users (name, email, telefone) values (%s, %s, %s)"
+    data = (line1, line2, line3)
+    cursor.execute(command, data)
+    db.commit()
 
 app = QtWidgets.QApplication([])
 main_form = uic.loadUi("main_form.ui")
