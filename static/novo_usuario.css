@@ -1,0 +1,59 @@
+.container {
+    width: 70%;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: azure;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba (0, 0, 0, 0.1);
+
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+
+}
+
+.submit-btn {
+    width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: aqua;
+    color: #fff;
+    text-align: left;
+    text-decoration: none ;
+    border: none;
+    border-radius: 5px;
+    transition: backgroud-color 0.3s;
+    cursor: pointer;
+
+}
+
+.delete-btn {
+    width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: aqua;
+    color: #fff;
+    text-align: left;
+    text-decoration: none ;
+    border: none;
+    border-radius: 5px;
+    transition: backgroud-color 0.3s;
+    cursor: pointer;
+
+}
+
+.back-btn{
+    width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: red;
+    color: #fff;
+    text-align: left;
+    text-decoration: none ;
+    border: none;
+    border-radius: 5px;
+    transition: backgroud-color 0.3s;
+    cursor: pointer;
+}

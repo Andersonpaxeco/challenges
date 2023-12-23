@@ -1,0 +1,72 @@
+.continer {
+    width: 70%;
+    margin : 50px auto;
+    padding : 40px;
+    background-color: cadetblue;
+    border-radius : 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0 ,0.1);
+    text-align: center;
+}
+
+h1{
+    color: #333;
+
+}
+
+form {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 8px;
+}
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea{
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+textarea{
+    height : 100px;
+}
+
+.agendar-btn{
+   width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: aqua;
+    color: #fff;
+    text-align: left;
+    text-decoration: none ;
+    border: none;
+    border-radius: 5px;
+    transition: backgroud-color 0.3s;
+    cursor: pointer;
+}
+
+.back-btn{
+    width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: red;
+    color: #fff;
+    text-align: left;
+    text-decoration: none ;
+    border: none;
+    border-radius: 5px;
+    transition: backgroud-color 0.3s;
+    cursor: pointer;
+}

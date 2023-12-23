@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='agendar.css')}}">
+
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Agendamentos</h1>
+        <u1>
+            <table border="1">
+                <style>
+                    table {
+                      border-collapse: collapse;
+                    }
+                </style>    
+                <tr>
+                    <td>ID</td>
+                    <td>Data - Hora</td>
+                    <td>Descricao</td>
+                    
+                </tr>
+          
+            {% for agenda_lista in agenda %}
+            <div style="text-align: left;">
+                    <tr>
+                        <td>{{agenda_lista[0]}}</td>
+                        <td>{{agenda_lista[1]}}</td>
+                        <td>{{agenda_lista[2]}}</td>
+                                          
+                    </tr>
+              
+                
+            
+            </div>
+            {% endfor %}
+            </table>
+        </u1>        
+
+        <h1>Agendar</h1>
+        <form action="{{ url_for('agendar')}}" method="POST">
+            <label for="usuario">Entre com o usuario :</label>
+            <input type="text" id="nome" name="nome" required><br><br>
+            <label for="data">Data :</label>
+            <input type="date" id="data" name="data" required><br><br>
+            <label for="hora">Hora :</label>
+            <input type="time" id="hora" name="hora" required><br><br>
+            <label for="descricao">Descrição :</label>
+            <textarea id="descricao" name="descricao" rows="2" cols="30" required></textarea><br><br>
+            <input type="submit" value="Agendar" class="agendar-btn">
+        </form>
+        <a href="{{ url_for('index')}}"><button class="back-btn">Voltar</button></a>   
+
+    </div>
+</body>
+</html>

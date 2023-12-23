@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF8">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'styles.css') }}">
+
+</head>
+<body>
+    <div class = "container">
+        <h1>Lista de Usuarios</h1>
+        <u1>
+            <table border="1">
+                <style>
+                    table {
+                      border-collapse: collapse;
+                    }
+                </style>  
+                <tr>
+                    <td>Nome</td>
+                    <td>Idade</td>
+                    <td>Sexo</td>
+                    <td>CPF</td>
+                    <td>Telefone</td>
+                    <td>Endereco</td>
+                    <td>E-mail</td>
+                </tr>
+          
+            {% for usuario in usuarios %}
+            <div style="text-align: left;">
+                    <tr>
+                        <td>{{usuario[1]}}</td>
+                        <td>{{usuario[6]}}</td>
+                        <td>{{usuario[4]}}</td>
+                        <td>{{usuario[5]}}</td>
+                        <td>{{usuario[3]}}</td>
+                        <td>{{usuario[7]}}</td>
+                        <td>{{usuario[2]}}</td>
+                    </tr>
+              
+                
+            
+            </div>
+            {% endfor %}
+            </table>
+
+        </u1>
+       
+        
+
+        <a href="{{ url_for('novo_usuario')}}"><button class="add-user">Adicionar novo Usuario</button></a>
+        <a href="{{ url_for('agendar')}}"><button class="agendar-btn">Agendar</button></a>
+        <a href="{{ url_for('clear_all')}}"><button class="clear-btn">Excluir Usuarios</button></a>
+    </div>
+</body>
+</html>
